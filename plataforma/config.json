@@ -1,0 +1,7 @@
+{
+  "apiBaseUrl": "maqueta://sin-servidor",
+  "cdnBaseUrl": "./contenido",
+  "supabaseUrl": "",
+  "supabaseAnonKey": "",
+  "entorno": "demo"
+}

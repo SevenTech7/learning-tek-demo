@@ -71,7 +71,8 @@ window.LEARNING_TEK_REGISTRY = {
       ],
       "entornos": {
         "demo": {
-          "url": null
+          "url": "./plataforma/",
+          "notaPublica": "Entra como alumna, docente, familia o dirección con la barra inferior. Los datos son inventados y no se guardan en ningún servidor: lo que haces solo vive en esta pestaña."
         }
       }
     }

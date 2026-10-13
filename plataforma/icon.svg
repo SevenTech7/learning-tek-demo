@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!--
+    Favicon de pestaña del navegador — un SVG escala nítido a cualquier
+    tamaño sin generar archivos. El ícono de instalación de la PWA (el
+    que usa el manifest, y lo que Play Store/Lighthouse exigen) son los
+    PNG reales en este mismo directorio (icon-192.png, icon-512.png,
+    icon-maskable.png), generados desde icon-fuente.svg con
+    tooling/scripts/generar-iconos-pwa.mjs — ver vite.config.ts.
+  -->
+  <rect width="512" height="512" rx="96" fill="#0f172a" />
+  <path
+    d="M120 152c48-16 96-16 136 8v192c-40-24-88-24-136-8V152Z"
+    fill="#f8fafc"
+  />
+  <path
+    d="M392 152c-48-16-96-16-136 8v192c40-24 88-24 136-8V152Z"
+    fill="#f8fafc"
+    opacity="0.85"
+  />
+  <line x1="256" y1="160" x2="256" y2="352" stroke="#0f172a" stroke-width="6" />
+</svg>

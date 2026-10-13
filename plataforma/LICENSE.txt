@@ -1,0 +1,25 @@
+Copyright (c) 2026 Portal Educativo Interactivo. Todos los derechos reservados.
+
+Este software, su documentación y sus recursos (en conjunto, el «Software») son propiedad de sus titulares y
+están protegidos por las leyes de derechos de autor.
+
+No se concede ninguna licencia, expresa ni implícita, para usar, copiar, modificar, fusionar, publicar,
+distribuir, sublicenciar, vender ni crear obras derivadas del Software, en todo o en parte, sin autorización
+previa y por escrito de los titulares.
+
+Única excepción: quien visite una demostración publicada por los titulares puede visualizarla y ejecutarla en
+su navegador, solo para evaluarla.
+
+Los nombres de personas, cursos, instituciones y textos de esta demostración son inventados.
+
+EL SOFTWARE SE ENTREGA «TAL CUAL», SIN GARANTÍA DE NINGÚN TIPO, EXPRESA O IMPLÍCITA. EN NINGÚN CASO LOS
+TITULARES SERÁN RESPONSABLES DE RECLAMACIONES, DAÑOS U OTRAS RESPONSABILIDADES DERIVADAS DEL SOFTWARE O DE SU USO.
+
+---
+
+Copyright (c) 2026 Portal Educativo Interactivo. All rights reserved.
+
+No license is granted to use, copy, modify, merge, publish, distribute, sublicense, sell or create derivative
+works of this software, in whole or in part, without the prior written permission of the copyright holders.
+The only exception: a visitor of a demonstration published by the copyright holders may view and run it in their
+browser for evaluation purposes.
