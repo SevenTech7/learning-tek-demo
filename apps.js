@@ -72,7 +72,29 @@ window.LEARNING_TEK_REGISTRY = {
       "entornos": {
         "demo": {
           "url": "./plataforma/",
-          "notaPublica": "Entra como alumna, docente, familia o dirección con la barra inferior. Los datos son inventados y no se guardan en ningún servidor: lo que haces solo vive en esta pestaña."
+          "acceso": [
+            {
+              "rol": "Alumna",
+              "usuario": "valeria.rojas",
+              "clave": "demo-maqueta"
+            },
+            {
+              "rol": "Docente",
+              "usuario": "marcos.aliaga",
+              "clave": "demo-maqueta"
+            },
+            {
+              "rol": "Familia",
+              "usuario": "rosa.mamani",
+              "clave": "demo-maqueta"
+            },
+            {
+              "rol": "Dirección",
+              "usuario": "carlos.mendoza",
+              "clave": "demo-maqueta"
+            }
+          ],
+          "notaPublica": "Entra como alumna, docente, familia o dirección con la barra inferior, o escribiendo uno de estos usuarios (la clave no se valida: sirve cualquiera). Los datos son inventados y no se guardan en ningún servidor: lo que haces solo vive en esta pestaña."
         }
       }
     }
