@@ -37,14 +37,14 @@ if (typeof ReadableStream !== 'undefined' && !ReadableStream.prototype[Symbol.as
 }
 
 export const LIMITES = Object.freeze({
-  maxBytes: 1024 * 1024,   // 1 MB
-  maxPages: 6,
+  maxBytes: 5 * 1024 * 1024, // 5 MB
+  maxPages: 100,           // ≈ 0,5 s y ≈ 1,3 MB de memoria por página en un equipo de escritorio (ver README)
   maxSide: 1600,           // lado mayor de la imagen de página, en px (igual que `--max-side` por defecto)
   zoomSide: 2400,          // imagen ampliada: menos que los 3200 px del producto para no agotar la memoria de un móvil
   thumbSize: 200,          // ancho de la miniatura, en px
   maxPixels: 12_000_000,   // tope por lienzo: un PDF con una página gigante no debe poder agotar la memoria
   maxImagePixels: 30_000_000, // tope de una imagen incrustada ya decodificada (un escaneado a 600 ppp en A4 son ≈ 35 Mpx en bilevel)
-  timeoutMs: 90_000,       // tiempo total de la conversión
+  timeoutMs: 180_000,      // tiempo total de la conversión (100 páginas ≈ 50 s en escritorio; un móvil tarda 2-3 veces más)
 });
 
 /** Error con un código estable y un mensaje listo para mostrar a quien visita la demostración. */
@@ -247,7 +247,7 @@ function traducirError(e) {
 export async function convertirPdf(file, { pdfjs, rutas = {}, progreso = () => {}, signal = null, nombre = '' } = {}) {
   if (!file || !file.size) throw new ErrorDemo('EMPTY', 'Ese archivo está vacío.');
   if (file.size > LIMITES.maxBytes) {
-    throw new ErrorDemo('TOO_BIG', `Ese archivo pesa ${formatMb(file.size)} y esta demostración admite PDF de hasta 1 MB.`);
+    throw new ErrorDemo('TOO_BIG', `Ese archivo pesa ${formatMb(file.size)} y esta demostración admite PDF de hasta ${formatMb(LIMITES.maxBytes)}.`);
   }
   progreso({ fase: 'leer' });
   const bytes = new Uint8Array(await file.arrayBuffer());

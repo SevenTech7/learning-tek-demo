@@ -29,6 +29,11 @@ function mostrarAviso(texto) {
   aviso.hidden = !texto;
 }
 
+/* Los límites que se muestran salen de LIMITES: una sola fuente. */
+const PAGINAS_LARGO = 30;
+$('lim-paginas').textContent = `${LIMITES.maxPages} páginas`;
+$('lim-peso').textContent = `${LIMITES.maxBytes / 1048576} MB`;
+
 /* ---- pdf.js: se carga solo cuando hace falta ---- */
 
 function cargarPdfjs() {
@@ -59,8 +64,9 @@ function crearVisor(src) {
   f.title = 'Visor del libro';
   f.setAttribute('allow', 'fullscreen');
   $('libro-marco').appendChild(f);
-  // Barras fijas: con las de serie (que se esconden hasta acercar el ratón) quien prueba la demostración no ve qué puede hacer.
-  f.src = `${src}#chrome=fixed`;
+  // Con las barras de serie del visor (se esconden hasta acercar el ratón): es el comportamiento del producto. En táctil y en
+  // ventanas estrechas el visor las deja fijas por su cuenta; en escritorio, `.libro-pista` explica cómo verlas.
+  f.src = src;
   f.addEventListener('load', () => { try { f.contentWindow.focus(); } catch { /* sin foco */ } }, { once: true });
   return f;
 }
@@ -132,7 +138,7 @@ async function convertir(file) {
   // Comprobaciones baratas antes de cargar pdf.js
   if (file.size === 0) return mostrarAviso('Ese archivo está vacío.');
   if (file.size > LIMITES.maxBytes) {
-    return mostrarAviso(`Ese archivo pesa ${(file.size / 1048576).toLocaleString('es', { maximumFractionDigits: 1 })} MB y esta demostración admite PDF de hasta 1 MB.`);
+    return mostrarAviso(`Ese archivo pesa ${(file.size / 1048576).toLocaleString('es', { maximumFractionDigits: 1 })} MB y esta demostración admite PDF de hasta ${LIMITES.maxBytes / 1048576} MB.`);
   }
   ocupado = true;
   const control = new AbortController();
@@ -154,7 +160,8 @@ async function convertir(file) {
         if (fase === 'leer') { estado.textContent = 'Leyendo el PDF…'; return; }
         barra.max = total;
         barra.value = pagina - 1;
-        estado.textContent = `Convirtiendo la página ${pagina} de ${total}…`;
+        estado.textContent = `Convirtiendo la página ${pagina} de ${total}…`
+          + (total > PAGINAS_LARGO ? ' Un PDF largo puede tardar un par de minutos: puedes cancelar cuando quieras.' : '');
       },
     });
     barra.value = barra.max;

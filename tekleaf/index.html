@@ -40,7 +40,7 @@
       <input id="archivo" class="oculto-visual" type="file" accept="application/pdf,.pdf">
       <label class="zona" id="zona" for="archivo">
         <span class="zona-titulo">Arrastra un PDF aquí o elige un archivo</span>
-        <span class="zona-ayuda">Hasta <strong>6 páginas</strong> y <strong>1 MB</strong>.</span>
+        <span class="zona-ayuda">Hasta <strong id="lim-paginas">100 páginas</strong> y <strong id="lim-peso">5 MB</strong>.</span>
         <span class="zona-boton">Elegir un PDF</span>
       </label>
       <p class="privacidad">Tu archivo no se sube a ningún servidor: se convierte aquí, en tu navegador, y se descarta al recargar o cerrar la página.</p>
@@ -67,6 +67,7 @@
       <div class="libro-info">
         <h2 id="libro-titulo" class="libro-titulo" tabindex="-1"></h2>
         <p id="libro-aviso" class="libro-aviso" role="status" hidden></p>
+        <p id="libro-pista" class="libro-pista">Acerca el puntero al borde superior o inferior del libro para ver sus barras.</p>
       </div>
       <a id="descargar" class="btn btn-sec" href="#" download title="Carpeta con el libro, lista para publicar en cualquier servidor o abrir con doble clic">Descargar<span class="largo"> paquete</span> (.zip)</a>
     </div>

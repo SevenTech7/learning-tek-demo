@@ -51,7 +51,7 @@ window.LEARNING_TEK_REGISTRY = {
       "entornos": {
         "demo": {
           "url": "./tekleaf/",
-          "notaPublica": "Abre un libro de ejemplo o convierte tu propio PDF (hasta 6 páginas y 1 MB). La conversión ocurre en tu navegador: el archivo no se sube a ningún servidor."
+          "notaPublica": "Abre un libro de ejemplo o convierte tu propio PDF (hasta 100 páginas y 5 MB). La conversión ocurre en tu navegador: el archivo no se sube a ningún servidor."
         }
       },
       "codigo": {

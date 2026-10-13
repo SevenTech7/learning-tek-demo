@@ -112,6 +112,9 @@ body.con-libro .barra, body.con-libro .pie { display: none; }
 .libro-info { flex: 1; min-width: 0; }
 .libro-titulo { font-size: 1rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; outline: none; }
 .libro-aviso { margin: 2px 0 0; font-size: 0.8rem; line-height: 1.3; color: var(--texto-2); }
+/* Solo donde el visor esconde sus barras (ratón y ventana ancha): ahí hay que decir cómo verlas. */
+.libro-pista { display: none; margin: 2px 0 0; font-size: 0.8rem; line-height: 1.3; color: var(--texto-2); }
+@media (hover: hover) and (pointer: fine) and (min-width: 521px) { .libro-pista { display: block; } }
 .libro-marco { flex: 1; min-height: 0; position: relative; background: #1f2430; }
 .libro-marco iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
 
