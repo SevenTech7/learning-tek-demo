@@ -6,7 +6,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'wasm-unsafe-eval'; style-src 'self'; img-src 'self' blob: data:; font-src 'self' blob: data:; connect-src 'self' blob:; worker-src 'self' blob:; frame-src 'self' blob:; base-uri 'none'; form-action 'none'">
-<title>TekLeaf — Demostración</title>
+<title>Tek 7 · TekLeaf — Demostración</title>
 <meta name="description" content="Convierte un PDF en un libro con páginas que se pasan, zoom, búsqueda e índice. Demostración de TekLeaf.">
 <meta name="color-scheme" content="light dark">
 <link rel="stylesheet" href="demo.css">
@@ -16,14 +16,30 @@
 
 <header class="barra">
   <a class="volver" href="../">← Learning TEK</a>
-  <span class="marca">TekLeaf</span>
+  <span class="marca">Tek 7 · TekLeaf</span>
   <span class="chip">Demostración</span>
+  <button id="salir" type="button" class="btn-salir" hidden>Salir</button>
 </header>
 
 <main id="principal">
 
+  <!-- Acceso: un solo usuario demo, el mismo de Autoría y Plataforma. Es una puerta de presentación (la demo no tiene servidor). -->
+  <section id="vista-acceso" class="contenido centrado" aria-labelledby="titulo-acceso" hidden>
+    <form id="form-acceso" class="acceso" novalidate>
+      <h1 id="titulo-acceso">Entra a la demostración</h1>
+      <p class="lead">El mismo usuario demo sirve en Autoría, TekLeaf y Plataforma Educativa.</p>
+      <label for="acceso-usuario">Usuario o correo</label>
+      <input id="acceso-usuario" name="usuario" type="text" autocomplete="username" autocapitalize="none" spellcheck="false" required>
+      <label for="acceso-clave">Contraseña</label>
+      <input id="acceso-clave" name="clave" type="password" autocomplete="current-password" required>
+      <p id="acceso-error" class="aviso" role="alert" hidden></p>
+      <button type="submit" class="btn">Entrar</button>
+      <p class="acceso-ayuda">Usuario demo: <strong>tek@tek7.demo</strong> · clave: <strong>tek7</strong></p>
+    </form>
+  </section>
+
   <!-- Inicio: libros de ejemplo y conversión de un PDF propio -->
-  <section id="vista-inicio" class="contenido" aria-labelledby="titulo-inicio">
+  <section id="vista-inicio" class="contenido" aria-labelledby="titulo-inicio" hidden>
     <div class="portada">
       <h1 id="titulo-inicio">Del PDF a un libro que se hojea</h1>
       <p class="lead">TekLeaf convierte un PDF en una publicación web con páginas que se pasan, zoom, búsqueda e índice. Abre un libro de ejemplo o prueba con tu propio PDF.</p>

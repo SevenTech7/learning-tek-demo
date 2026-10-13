@@ -59,6 +59,19 @@ h2 { font-size: 1.15rem; }
 .marca { font-weight: 700; letter-spacing: 0.01em; }
 .chip { font-size: 0.75rem; padding: 2px 8px; border-radius: 999px; background: var(--acento-suave); color: var(--acento); font-weight: 600; }
 
+.btn-salir { font: inherit; font-size: 0.85rem; padding: 4px 12px; border-radius: 8px; border: 1px solid var(--borde); background: transparent; color: var(--texto-2); cursor: pointer; }
+.btn-salir:hover { color: var(--acento); border-color: var(--acento); }
+
+/* Acceso */
+.acceso { width: min(380px, 100%); display: grid; gap: 8px; text-align: left; background: var(--superficie); border: 1px solid var(--borde); border-radius: var(--radio); padding: 24px; }
+.acceso h1 { font-size: 1.4rem; }
+.acceso .lead { margin: 0 0 8px; font-size: 0.95rem; }
+.acceso label { font-weight: 600; font-size: 0.9rem; margin-top: 6px; }
+.acceso input { font: inherit; padding: 9px 10px; border: 1px solid var(--borde); border-radius: 8px; background: var(--superficie-2); color: var(--texto); }
+.acceso input:focus-visible { outline: 3px solid var(--acento); outline-offset: 1px; }
+.acceso .btn { margin-top: 10px; }
+.acceso-ayuda { margin: 6px 0 0; font-size: 0.85rem; color: var(--texto-2); }
+
 /* Contenido */
 main { flex: 1; display: flex; flex-direction: column; min-height: 0; }
 .contenido { width: 100%; max-width: 860px; margin: 0 auto; padding: 32px 16px 48px; display: grid; gap: 20px; }

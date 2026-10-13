@@ -25,9 +25,9 @@ window.LEARNING_TEK_REGISTRY = {
           "url": "./autoria/",
           "acceso": [
             {
-              "rol": "Autor",
-              "usuario": "usuariodemo@example.com",
-              "clave": "Abc123!"
+              "rol": "Usuario demo",
+              "usuario": "tek@tek7.demo",
+              "clave": "tek7"
             }
           ],
           "notaPublica": "El editor completo con un proyecto de ejemplo: 21 tipos de componente, plantillas, kits de marca, componentes globales, publicación, vista previa con el player real y descargas. Lo que hagas vive solo en esta pestaña; «Restablecer demo» vuelve al ejemplo."
@@ -51,7 +51,14 @@ window.LEARNING_TEK_REGISTRY = {
       "entornos": {
         "demo": {
           "url": "./tekleaf/",
-          "notaPublica": "Abre un libro de ejemplo o convierte tu propio PDF (hasta 100 páginas y 5 MB). La conversión ocurre en tu navegador: el archivo no se sube a ningún servidor."
+          "acceso": [
+            {
+              "rol": "Usuario demo",
+              "usuario": "tek@tek7.demo",
+              "clave": "tek7"
+            }
+          ],
+          "notaPublica": "Entra con el usuario demo, abre un libro de ejemplo o convierte tu propio PDF (hasta 100 páginas y 5 MB). La conversión ocurre en tu navegador: el archivo no se sube a ningún servidor."
         }
       },
       "codigo": {
@@ -74,37 +81,12 @@ window.LEARNING_TEK_REGISTRY = {
           "url": "./plataforma/",
           "acceso": [
             {
-              "rol": "Alumna",
-              "usuario": "valeria.rojas",
-              "clave": "demo-maqueta"
-            },
-            {
-              "rol": "Docente",
-              "usuario": "marcos.aliaga",
-              "clave": "demo-maqueta"
-            },
-            {
-              "rol": "Familia",
-              "usuario": "rosa.mamani",
-              "clave": "demo-maqueta"
-            },
-            {
-              "rol": "Dirección",
-              "usuario": "carlos.mendoza",
-              "clave": "demo-maqueta"
-            },
-            {
-              "rol": "Admin (superadmin)",
-              "usuario": "andrea.soliz",
-              "clave": "demo-maqueta"
-            },
-            {
-              "rol": "Overlord",
-              "usuario": "ricardo.salvatierra",
-              "clave": "demo-maqueta"
+              "rol": "Usuario demo (entra como admin)",
+              "usuario": "tek@tek7.demo",
+              "clave": "tek7"
             }
           ],
-          "notaPublica": "Entra como alumna, docente, familia, dirección, admin (crea usuarios y arma los colegios) u overlord (además, las cuentas de plataforma y el alta de contenido) con la barra inferior, o escribiendo uno de estos usuarios (la clave no se valida: sirve cualquiera). Los datos son inventados y no se guardan en ningún servidor: lo que haces solo vive en esta pestaña."
+          "notaPublica": "Entra con el usuario demo (también vale «tek»). Queda como admin; con la barra inferior puedes ver la plataforma como alumna, docente, familia, dirección u overlord. Los datos son inventados y no se guardan en ningún servidor: lo que haces solo vive en esta pestaña."
         }
       }
     }

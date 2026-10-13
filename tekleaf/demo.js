@@ -1,15 +1,21 @@
 /*
  * TekLeaf — demostración. Interfaz: libros de ejemplo (paquetes reales del producto) y conversión de un PDF propio en el navegador.
- * Nada se guarda: ni cookies ni almacenamiento propio. El libro convertido vive en memoria y se descarta al volver o recargar.
+ * Nada se guarda: ni cookies ni datos del visitante. El libro convertido vive en memoria y se descarta al volver o recargar.
+ * Lo único que queda en la pestaña es la marca de «ya entró» (sessionStorage), que se borra al cerrarla o al pulsar «Salir».
+ *
+ * El acceso es una puerta de presentación, no seguridad: la demo no tiene servidor y la credencial es pública (es la misma de las
+ * demos de Autoría y Plataforma). El producto real no lleva este acceso.
  */
 import { LIMITES, ErrorDemo, convertirPdf, slugify } from './convertir.js';
 import { componerPaquete, crearZip, ARCHIVOS_VISOR } from './paquete.js';
+
+const ACCESO = { usuarios: ['tek', 'tek@tek7.demo'], clave: 'tek7', marca: 'tekleaf-demo:sesion' };
 
 const $ = (id) => document.getElementById(id);
 const BASE = new URL('./', import.meta.url);
 const ruta = (rel) => new URL(rel, BASE).href;
 
-const vistas = { inicio: $('vista-inicio'), progreso: $('vista-progreso'), libro: $('vista-libro') };
+const vistas = { acceso: $('vista-acceso'), inicio: $('vista-inicio'), progreso: $('vista-progreso'), libro: $('vista-libro') };
 const aviso = $('aviso');
 const entrada = $('archivo');
 const zona = $('zona');
@@ -22,6 +28,24 @@ let libro = null;   // libro abierto: { urls: string[], zip: () => Promise<Blob>
 function mostrar(nombre) {
   for (const [k, el] of Object.entries(vistas)) el.hidden = k !== nombre;
   document.body.classList.toggle('con-libro', nombre === 'libro');
+  $('salir').hidden = nombre === 'acceso';
+}
+
+/* ---- acceso ---- */
+
+function haEntrado() {
+  try { return sessionStorage.getItem(ACCESO.marca) === '1'; } catch { return false; }
+}
+
+function marcarEntrada(si) {
+  try { if (si) sessionStorage.setItem(ACCESO.marca, '1'); else sessionStorage.removeItem(ACCESO.marca); } catch { /* sin almacenamiento: entra igual, pero no se recuerda */ }
+}
+
+function pedirAcceso() {
+  $('acceso-error').hidden = true;
+  $('acceso-clave').value = '';
+  mostrar('acceso');
+  $('acceso-usuario').focus({ preventScroll: true });
 }
 
 function mostrarAviso(texto) {
@@ -223,6 +247,7 @@ async function cargarMuestras() {
     datos = await res.json();
   } catch { return; }
   const lista = $('lista-muestras');
+  if (lista.children.length) return;   // ya cargadas (se entra, se sale y se vuelve a entrar)
   const libros = Array.isArray(datos && datos.libros) ? datos.libros : [];
   for (const m of libros) {
     if (!m || !/^[a-z0-9-]+$/.test(String(m.id))) continue;
@@ -281,6 +306,31 @@ $('cancelar').addEventListener('click', () => {
   if (abortar) abortar.abort('cancel');
   $('estado').textContent = 'Cancelando…';
 });
+$('form-acceso').addEventListener('submit', (e) => {
+  e.preventDefault();
+  const usuario = $('acceso-usuario').value.trim().toLowerCase();
+  if (ACCESO.usuarios.includes(usuario) && $('acceso-clave').value === ACCESO.clave) {
+    marcarEntrada(true);
+    $('acceso-usuario').value = '';
+    $('acceso-clave').value = '';
+    mostrar('inicio');
+    cargarMuestras();
+    $('titulo-inicio').scrollIntoView?.({ block: 'start' });
+  } else {
+    const error = $('acceso-error');
+    error.textContent = 'Usuario o contraseña incorrectos.';
+    error.hidden = false;
+    $('acceso-clave').value = '';
+    $('acceso-clave').focus({ preventScroll: true });
+  }
+});
+$('salir').addEventListener('click', () => {
+  if (abortar) abortar.abort('cancel');
+  liberarLibro();
+  marcarEntrada(false);
+  if (location.hash) history.replaceState(null, '', location.pathname + location.search);
+  pedirAcceso();
+});
 $('volver-inicio').addEventListener('click', () => volverAlInicio());
 $('cerrar-nota').addEventListener('click', () => { $('libro-nota').hidden = true; $('libro-logo').focus({ preventScroll: true }); });
 $('libro-logo').addEventListener('click', () => { const n = $('libro-nota'); n.hidden = !n.hidden; });
@@ -288,6 +338,11 @@ window.addEventListener('popstate', () => {
   if (!vistas.libro.hidden) volverAlInicio({ desdeHistoria: true });
 });
 
-// Sin estado propio: recargar siempre vuelve al inicio, sin dejar `#libro` en la dirección.
+// Sin estado propio: recargar siempre vuelve al inicio (o al acceso), sin dejar `#libro` en la dirección.
 if (location.hash) history.replaceState(null, '', location.pathname + location.search);
-cargarMuestras();
+if (haEntrado()) {
+  mostrar('inicio');
+  cargarMuestras();
+} else {
+  pedirAcceso();
+}
