@@ -63,15 +63,25 @@
   <!-- Libro abierto -->
   <section id="vista-libro" class="libro" aria-label="Libro" hidden>
     <div class="libro-barra">
-      <button id="volver-inicio" type="button" class="btn btn-sec">← Volver</button>
-      <div class="libro-info">
-        <h2 id="libro-titulo" class="libro-titulo" tabindex="-1"></h2>
-        <p id="libro-aviso" class="libro-aviso" role="status" hidden></p>
-        <p id="libro-pista" class="libro-pista">Acerca el puntero al borde superior o inferior del libro para ver sus barras.</p>
-      </div>
-      <a id="descargar" class="btn btn-sec" href="#" download title="Carpeta con el libro, lista para publicar en cualquier servidor o abrir con doble clic">Descargar<span class="largo"> paquete</span> (.zip)</a>
+      <button id="volver-inicio" type="button" class="libro-volver" aria-label="Volver al inicio" title="Volver al inicio">
+        <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <button id="libro-logo" type="button" class="libro-logo" aria-label="Información del libro y descarga" aria-controls="libro-nota" title="Información y descarga">
+        <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><path d="M5 19C5 10 10 5 20 4c0 10-5 15-14 15z" fill="currentColor"/><path d="M5 19c3-5 6-8 10-10" fill="none" stroke="#1f2430" stroke-width="1.6" stroke-linecap="round"/></svg>
+        <span>TekLeaf</span>
+      </button>
+      <h2 id="libro-titulo" class="oculto-visual" tabindex="-1"></h2>
     </div>
     <div id="libro-marco" class="libro-marco"></div>
+    <!-- Aviso y descarga: flotan sobre el visor y se pueden cerrar; el logo los vuelve a mostrar. -->
+    <div id="libro-nota" class="libro-nota" role="status" hidden>
+      <p class="libro-nota-texto">
+        <span id="libro-aviso"></span>
+        <span id="libro-pista" class="libro-pista">Acerca el puntero al borde superior o inferior del libro para ver sus barras.</span>
+      </p>
+      <a id="descargar" class="btn btn-sec" href="#" download title="Carpeta con el libro, lista para publicar en cualquier servidor o abrir con doble clic">Descargar<span class="largo"> paquete</span> (.zip)</a>
+      <button id="cerrar-nota" type="button" class="libro-nota-cerrar" aria-label="Cerrar el aviso" title="Cerrar">×</button>
+    </div>
   </section>
 
 </main>

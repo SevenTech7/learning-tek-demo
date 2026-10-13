@@ -30,7 +30,7 @@ window.LEARNING_TEK_REGISTRY = {
               "clave": "Abc123!"
             }
           ],
-          "notaPublica": "Demostración con un curso de ejemplo: arma páginas arrastrando componentes y míralas en la vista previa. Nada se guarda: al recargar vuelve al ejemplo."
+          "notaPublica": "El editor completo con un proyecto de ejemplo: 21 tipos de componente, plantillas, kits de marca, componentes globales, publicación, vista previa con el player real y descargas. Lo que hagas vive solo en esta pestaña; «Restablecer demo» vuelve al ejemplo."
         }
       },
       "codigo": {
@@ -104,7 +104,7 @@ window.LEARNING_TEK_REGISTRY = {
               "clave": "demo-maqueta"
             }
           ],
-          "notaPublica": "Entra como alumna, docente, familia, dirección, admin (crea usuarios y arma los colegios) u overlord (además, el catálogo) con la barra inferior, o escribiendo uno de estos usuarios (la clave no se valida: sirve cualquiera). Los datos son inventados y no se guardan en ningún servidor: lo que haces solo vive en esta pestaña."
+          "notaPublica": "Entra como alumna, docente, familia, dirección, admin (crea usuarios y arma los colegios) u overlord (además, las cuentas de plataforma y el alta de contenido) con la barra inferior, o escribiendo uno de estos usuarios (la clave no se valida: sirve cualquiera). Los datos son inventados y no se guardan en ningún servidor: lo que haces solo vive en esta pestaña."
         }
       }
     }

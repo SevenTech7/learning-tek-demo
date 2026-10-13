@@ -83,7 +83,7 @@ function abrirLibro({ src, titulo, nota, descarga, nombreZip, zip }) {
   $('libro-titulo').textContent = titulo;
   const n = $('libro-aviso');
   n.textContent = nota || '';
-  n.hidden = !nota;
+  $('libro-nota').hidden = false;
   const dl = $('descargar');
   dl.onclick = null;
   if (descarga) {
@@ -118,9 +118,8 @@ function abrirLibro({ src, titulo, nota, descarga, nombreZip, zip }) {
 }
 
 function mostrarAvisoLibro(texto) {
-  const n = $('libro-aviso');
-  n.textContent = texto;
-  n.hidden = !texto;
+  $('libro-aviso').textContent = texto;
+  $('libro-nota').hidden = false;
 }
 
 function volverAlInicio({ desdeHistoria = false } = {}) {
@@ -283,6 +282,8 @@ $('cancelar').addEventListener('click', () => {
   $('estado').textContent = 'Cancelando…';
 });
 $('volver-inicio').addEventListener('click', () => volverAlInicio());
+$('cerrar-nota').addEventListener('click', () => { $('libro-nota').hidden = true; $('libro-logo').focus({ preventScroll: true }); });
+$('libro-logo').addEventListener('click', () => { const n = $('libro-nota'); n.hidden = !n.hidden; });
 window.addEventListener('popstate', () => {
   if (!vistas.libro.hidden) volverAlInicio({ desdeHistoria: true });
 });
