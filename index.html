@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta name="robots" content="noindex, nofollow" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Punto de entrada a las aplicaciones de Learning TEK. Cada una se despliega por separado." />
+    <meta name="referrer" content="no-referrer" />
+    <title>Learning TEK</title>
+    <link rel="icon" href="assets/icon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="assets/styles.css" />
+  </head>
+  <body>
+    <a class="saltar" href="#apps">Ir a las aplicaciones</a>
+
+    <header class="cabecera">
+      <div class="contenedor cabecera__fila">
+        <div>
+          <p class="marca">Learning TEK</p>
+          <h1>Aplicaciones</h1>
+          <p class="cabecera__texto">
+            Versiones de demostración de las aplicaciones de Learning TEK. Nada de lo que hagas aquí se guarda.
+          </p>
+        </div>
+        <nav class="entornos" aria-label="Entorno" id="entornos"></nav>
+      </div>
+    </header>
+
+    <main class="contenedor" id="apps" tabindex="-1">
+      <div class="barra">
+        <p class="resumen" id="resumen" aria-live="polite"></p>
+        <label class="filtro" id="filtro" hidden>
+          <span class="visualmente-oculto">Buscar aplicación</span>
+          <input type="search" id="filtro-texto" placeholder="Buscar…" autocomplete="off" />
+        </label>
+      </div>
+
+      <div class="rejilla" id="rejilla"></div>
+
+      <noscript>
+        <p class="aviso">Esta página necesita JavaScript para mostrar la lista de aplicaciones.</p>
+      </noscript>
+    </main>
+
+    <footer class="pie">
+      <div class="contenedor">
+        <p>
+          Las demos públicas son de prueba: lo que hagas en ellas se pierde al recargar o reiniciar. Las credenciales
+          que se muestran son de demostración.
+        </p>
+      </div>
+    </footer>
+
+    <script src="apps.js"></script>
+    <script src="assets/app.js"></script>
+  </body>
+</html>
