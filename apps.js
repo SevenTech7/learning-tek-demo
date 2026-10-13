@@ -92,9 +92,19 @@ window.LEARNING_TEK_REGISTRY = {
               "rol": "Dirección",
               "usuario": "carlos.mendoza",
               "clave": "demo-maqueta"
+            },
+            {
+              "rol": "Admin (superadmin)",
+              "usuario": "andrea.soliz",
+              "clave": "demo-maqueta"
+            },
+            {
+              "rol": "Overlord",
+              "usuario": "ricardo.salvatierra",
+              "clave": "demo-maqueta"
             }
           ],
-          "notaPublica": "Entra como alumna, docente, familia o dirección con la barra inferior, o escribiendo uno de estos usuarios (la clave no se valida: sirve cualquiera). Los datos son inventados y no se guardan en ningún servidor: lo que haces solo vive en esta pestaña."
+          "notaPublica": "Entra como alumna, docente, familia, dirección, admin (crea usuarios y arma los colegios) u overlord (además, el catálogo) con la barra inferior, o escribiendo uno de estos usuarios (la clave no se valida: sirve cualquiera). Los datos son inventados y no se guardan en ningún servidor: lo que haces solo vive en esta pestaña."
         }
       }
     }
