@@ -1,0 +1,10 @@
+/* Página contenedora y branding (FR-EXP-101). */
+:root {
+  --tl-accent: #2563eb;
+  --tl-embed-bg: #1f2430;
+}
+html, body { height: 100%; margin: 0; }
+body { font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
+body.tl-host-page { background: #1f2430; }
+body.tl-host-embed { background: var(--tl-embed-bg); }
+.tl-root { height: 100%; }

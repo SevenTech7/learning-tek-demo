@@ -1,0 +1,259 @@
+/* TekLeaf viewer. Temas claro/oscuro vía variables; sin recursos externos. */
+.tl-viewer {
+  --bg: #eef0f4; --panel: #ffffff; --fg: #1b1f27; --muted: #5a6272; --line: #d5d9e2;
+  --btn-hover: #e4e8f0; --stage: #d9dde6; --shadow: 0 6px 24px rgba(0,0,0,.28);
+  --accent: var(--tl-accent, #2563eb); --accent-fg: var(--tl-accent-fg, #ffffff); --mark: rgba(255,214,0,.45); --mark-active: rgba(255,120,0,.6);
+  --tl-sys-font: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  display: flex; flex-direction: column; height: 100%; min-height: 0; color: var(--fg); background: var(--bg);
+  font: 14px/1.4 var(--tl-font, var(--tl-sys-font)); outline: none; position: relative;
+}
+@media (prefers-color-scheme: dark) {
+  .tl-viewer:not([data-theme="light"]) {
+    --bg: #14171d; --panel: #1d222b; --fg: #e8ebf1; --muted: #a0a8b8; --line: #2e3542; --btn-hover: #2a313d; --stage: #0f1217;
+    --accent: var(--tl-accent-dark, #7aa7ff); --accent-fg: var(--tl-accent-dark-fg, #0b1220);
+  }
+}
+.tl-viewer[data-theme="dark"] {
+  --bg: #14171d; --panel: #1d222b; --fg: #e8ebf1; --muted: #a0a8b8; --line: #2e3542; --btn-hover: #2a313d; --stage: #0f1217;
+  --accent: var(--tl-accent-dark, #7aa7ff); --accent-fg: var(--tl-accent-dark-fg, #0b1220);
+}
+.tl-host-embed .tl-viewer { background: var(--tl-embed-bg); }
+.tl-viewer *, .tl-viewer *::before, .tl-viewer *::after { box-sizing: border-box; }
+.tl-viewer [hidden] { display: none !important; }
+.tl-sr { position: absolute !important; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+
+/* F3.4: con un color de barra propio (--tl-bar y derivados, que fija el visor) las dos barras lo usan en ambos temas */
+.tl-toolbar, .tl-bottom {
+  display: flex; align-items: center; gap: 4px; padding: 6px 8px; background: var(--tl-bar, var(--panel)); color: var(--tl-bar-fg, inherit); flex: none;
+}
+.tl-toolbar { border-bottom: 1px solid var(--tl-bar-line, var(--line)); }
+.tl-bottom { border-top: 1px solid var(--tl-bar-line, var(--line)); gap: 6px; }
+.tl-viewer[data-toolbar="bottom"] .tl-toolbar { border-bottom: 0; border-top: 1px solid var(--tl-bar-line, var(--line)); }
+.tl-group { display: flex; align-items: center; gap: 2px; }
+.tl-pagegroup { order: 1; gap: 6px; margin-right: 6px; }
+.tl-toolbar .tl-zone-right { order: 2; }
+.tl-grow { flex: 1; min-width: 0; justify-content: center; }
+.tl-title { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-weight: 600; }
+.tl-btn {
+  display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; padding: 0; border: 0; border-radius: 8px;
+  background: transparent; color: inherit; cursor: pointer; text-decoration: none;
+}
+.tl-btn:hover:not(:disabled):not([aria-expanded="true"]) { background: var(--btn-hover); }
+.tl-toolbar .tl-btn:hover:not(:disabled):not([aria-expanded="true"]), .tl-bottom .tl-btn:hover:not(:disabled), .tl-toolbar .tl-zoomlabel:hover { background: var(--tl-bar-hover, var(--btn-hover)); }
+.tl-btn:disabled { opacity: .35; cursor: default; }
+.tl-btn[aria-expanded="true"] { background: var(--tl-bar-active, var(--accent)); color: var(--tl-bar-active-fg, var(--accent-fg)); }
+.tl-btn svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.tl-viewer :focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.tl-toolbar :focus-visible, .tl-bottom :focus-visible { outline-color: var(--tl-bar-fg, var(--accent)); }
+.tl-zoomlabel { min-width: 52px; height: 40px; border: 0; border-radius: 8px; background: transparent; color: inherit; cursor: pointer; font: inherit; }
+.tl-zoomlabel:hover { background: var(--btn-hover); }
+
+.tl-body { flex: 1; display: flex; min-height: 0; position: relative; }
+.tl-stagewrap { flex: 1; position: relative; min-width: 0; background: var(--stage); overflow: hidden; }
+/* F3.2: con imagen de fondo, en tema oscuro una capa semitransparente mantiene el contraste de los controles y de la página */
+.tl-stagewrap.tl-bgimage::before { content: ""; position: absolute; inset: 0; background: rgba(15, 18, 23, .62); opacity: 0; pointer-events: none; }
+.tl-viewer[data-theme="dark"] .tl-stagewrap.tl-bgimage::before { opacity: 1; }
+@media (prefers-color-scheme: dark) { .tl-viewer:not([data-theme="light"]) .tl-stagewrap.tl-bgimage::before { opacity: 1; } }
+.tl-stage { position: absolute; inset: 0; overflow: hidden; touch-action: none; user-select: none; -webkit-user-select: none; cursor: default; }
+.tl-stage.tl-zoomed { cursor: grab; }
+.tl-zoomlayer { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; perspective: 2400px; transform-origin: center center; }
+.tl-spread { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
+.tl-page { position: relative; background: #fff; box-shadow: var(--shadow); flex: none; container-type: size; overflow: hidden; }
+/* La sombra de cada página solo sale por su lado exterior (el recorte quita la que caería sobre la página vecina): la sombra del lomo
+   es el degradado de `::after`, que también llevan las copias de la hoja que gira (`tl-spine-l/r`), así no cambia al levantarla. */
+.tl-spread .tl-left { box-shadow: -4px 6px 24px rgba(0,0,0,.28); clip-path: inset(-48px 0 -48px -48px); }
+.tl-spread .tl-right { box-shadow: 4px 6px 24px rgba(0,0,0,.28); clip-path: inset(-48px -48px -48px 0); }
+.tl-spread .tl-left::after, .tl-spread .tl-right::after, .tl-turn-in > .tl-spine-l::after, .tl-turn-in > .tl-spine-r::after {
+  content: ""; position: absolute; top: 0; bottom: 0; width: 24px; pointer-events: none;
+}
+.tl-spread .tl-left::after, .tl-turn-in > .tl-spine-l::after { right: 0; background: linear-gradient(to left, rgba(0,0,0,.22), transparent); }
+.tl-spread .tl-right::after, .tl-turn-in > .tl-spine-r::after { left: 0; background: linear-gradient(to right, rgba(0,0,0,.2), transparent); }
+.tl-img { display: block; width: 100%; height: 100%; object-fit: contain; pointer-events: none; -webkit-user-drag: none; }
+.tl-isloading .tl-img { opacity: 0; }
+.tl-isloading::before {
+  content: ""; position: absolute; inset: 0; background: linear-gradient(100deg, #e9ecf1 30%, #f6f7fa 50%, #e9ecf1 70%); background-size: 200% 100%;
+  animation: tl-shimmer 1.2s linear infinite;
+}
+@keyframes tl-shimmer { to { background-position: -200% 0; } }
+.tl-failed { background: #f3f4f7; }
+.tl-failed .tl-img { display: none; }
+.tl-failmsg { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; color: #333; text-align: center; padding: 8px; }
+.tl-retry { padding: 6px 14px; border: 1px solid var(--line); border-radius: 8px; background: var(--panel); color: var(--fg); cursor: pointer; font: inherit; }
+.tl-retry:hover { background: var(--btn-hover); }
+
+/* Pase de página (F2): la hoja se dobla con clip-path + transform; por fotograma nunca cambia el layout. */
+.tl-leaf { position: absolute; width: 0; height: 0; transform-origin: 0 0; z-index: 5; pointer-events: none; }
+.tl-turn-layer { position: absolute; left: 0; top: 0; contain: strict; pointer-events: none; }
+.tl-turn-back { transform-origin: 0 0; }
+.tl-turn-in { position: absolute; inset: 0; }
+.tl-turn-in > .tl-page, .tl-turn-paper > .tl-page { position: absolute; inset: 0; width: 100% !important; height: 100% !important; margin: 0; box-shadow: none; }
+.tl-turn-paper { background: #f7f4ec; }
+.tl-turn-paper > .tl-turn-ghost { opacity: .1; }
+.tl-turn-fx { position: absolute; inset: 0; pointer-events: none; }
+.tl-turn-grad { position: absolute; left: 0; top: 0; transform-origin: 0 0; pointer-events: none; }
+
+.tl-hl, .tl-links, .tl-text { position: absolute; inset: 0; }
+.tl-hl { pointer-events: none; }
+/* la capa de enlaces cubre toda la página por encima de la de texto: solo los propios enlaces reciben el ratón, para poder seleccionar el texto de debajo */
+.tl-links { pointer-events: none; }
+.tl-mark { position: absolute; background: var(--mark); mix-blend-mode: multiply; border-radius: 2px; }
+.tl-mark.tl-active { background: var(--mark-active); outline: 2px solid #ff7800; }
+.tl-link { position: absolute; display: block; border-radius: 3px; pointer-events: auto; }
+.tl-link:hover { background: rgba(37,99,235,.15); }
+/* la página es papel claro en los dos temas: el acento del tema oscuro (azul claro) no llegaba a 3:1; un anillo oscuro con filete blanco se ve sobre cualquier imagen */
+.tl-viewer .tl-link:focus-visible { outline: 3px solid #14171d; outline-offset: 2px; box-shadow: 0 0 0 2px #fff; }
+.tl-text { font-family: var(--tl-sys-font); color: transparent; user-select: text; -webkit-user-select: text; cursor: text; }
+.tl-text span { position: absolute; display: block; overflow: hidden; white-space: pre; line-height: 1; }
+.tl-text ::selection { background: rgba(37,99,235,.35); }
+.tl-text { -webkit-touch-callout: none; }
+/* barra «Copiar» de la selección con el dedo (85-select.js) */
+.tl-selbar { position: absolute; z-index: 30; display: flex; gap: 2px; padding: 4px; border-radius: 10px; background: var(--panel); color: var(--fg); border: 1px solid var(--line); box-shadow: var(--shadow); }
+.tl-selbtn { min-width: 44px; min-height: 44px; padding: 0 14px; border: 0; border-radius: 8px; background: transparent; color: inherit; font: inherit; font-weight: 600; cursor: pointer; }
+.tl-selbtn:hover { background: var(--btn-hover); }
+.tl-selclose { font-size: 20px; font-weight: 400; color: var(--muted); }
+.tl-copybuf { position: fixed; left: -9999px; top: 0; width: 1px; height: 1px; opacity: 0; }
+/* zonas de audio sobre la página y reproductor flotante (75-audio.js) */
+.tl-zones { position: absolute; inset: 0; pointer-events: none; }
+.tl-zone { position: absolute; display: flex; align-items: center; justify-content: center; min-width: 44px; min-height: 44px; padding: 0; border: 2px solid transparent; border-radius: 10px; background: transparent; color: var(--accent-fg); cursor: pointer; pointer-events: auto; }
+.tl-zone svg { width: 36px; height: 36px; padding: 7px; border-radius: 50%; background: var(--accent); box-shadow: 0 2px 8px rgba(0,0,0,.35); fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.tl-zone:hover, .tl-zone:focus-visible, .tl-zone[aria-pressed="true"] { border-color: var(--accent); background: rgba(37,99,235,.10); }
+.tl-audio { position: absolute; z-index: 25; top: 12px; left: 50%; transform: translateX(-50%); display: flex; align-items: center; gap: 8px; max-width: calc(100% - 24px); width: 460px; padding: 6px 8px; border-radius: 12px; background: var(--panel); color: var(--fg); border: 1px solid var(--line); box-shadow: var(--shadow); }
+.tl-audio-btn { flex: none; display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; padding: 0; border: 0; border-radius: 8px; background: transparent; color: inherit; cursor: pointer; }
+.tl-audio-btn:hover { background: var(--btn-hover); }
+.tl-audio-btn svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.tl-audio-title { flex: 0 1 30%; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-weight: 600; }
+.tl-audio-seek { flex: 1; min-width: 60px; accent-color: var(--accent); }
+.tl-audio-time { flex: none; font-variant-numeric: tabular-nums; color: var(--muted); font-size: 13px; }
+@media (max-width: 480px) { .tl-audio-title { display: none; } }
+
+.tl-side { position: absolute; top: 50%; transform: translateY(-50%); z-index: 6; background: rgba(0,0,0,.35); color: #fff; width: 44px; height: 64px; }
+.tl-side:hover:not(:disabled) { background: rgba(0,0,0,.55); }
+.tl-side-prev { left: 6px; } .tl-side-next { right: 6px; }
+.tl-loading { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; color: var(--muted); pointer-events: none; z-index: 7; }
+
+.tl-scroll { position: absolute; inset: 0; overflow: auto; --tl-zoom: 1; }
+.tl-scrollinner { width: calc(min(100%, 900px) * var(--tl-zoom)); margin: 0 auto; padding: 12px 0; display: flex; flex-direction: column; gap: 12px; }
+.tl-scrollpage { width: 100%; background: #fff; box-shadow: var(--shadow); }
+.tl-scrollpage .tl-page { width: 100% !important; height: auto; }
+.tl-scrollpage .tl-img { height: auto; }
+
+.tl-slider { flex: 1; min-width: 60px; accent-color: var(--tl-bar-active, var(--accent)); height: 28px; }
+/* logo de la marca en la esquina izquierda de la barra superior */
+.tl-brandlogo { flex: none; height: 36px; width: auto; max-width: 190px; object-fit: contain; margin: 0 10px 0 4px; }
+/* tira de miniaturas de la barra inferior: portada sola y parejas, la actual resaltada */
+.tl-film { position: relative; flex: 1; min-width: 0; display: flex; align-items: flex-end; gap: 4px; padding: 2px; overflow-x: auto; overflow-y: hidden; scrollbar-width: thin; }
+/* centradas; los márgenes automáticos (y no justify-content) dejan desplazarse hasta la primera si no caben */
+.tl-film > :first-child { margin-left: auto; }
+.tl-film > :last-child { margin-right: auto; }
+.tl-film-item { flex: none; display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 3px 4px 2px; border: 2px solid transparent; border-radius: 6px; background: transparent; color: inherit; font: inherit; font-size: 11px; line-height: 1.1; cursor: pointer; }
+.tl-film-item:hover { background: var(--tl-bar-hover, var(--btn-hover)); }
+.tl-film-item[aria-current="page"] { border-color: var(--tl-bar-active, var(--accent)); }
+/* las miniaturas se atenúan, el número no: su contraste es el del texto de la barra */
+.tl-film-pages { display: flex; gap: 1px; opacity: .75; }
+.tl-film-item:hover .tl-film-pages, .tl-film-item[aria-current="page"] .tl-film-pages { opacity: 1; }
+.tl-film-item img { display: block; height: 44px; width: auto; background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,.35); }
+/* Barras ocultas. Con ratón y ventana ancha la barra de herramientas (arriba) está oculta del todo y la de navegación (abajo) asoma
+   solo por la mitad y atenuada, con las miniaturas partidas: al pasar el puntero por ella sube entera y pierde la atenuación. Ambas
+   tienen un fondo casi transparente (y un desenfoque leve para que se lea sobre la página). La de arriba queda a 12 px de borde
+   sensibles: al acercar el puntero baja, y poco después de alejarlo vuelve a esconderse. El teclado las abre al enfocar un control,
+   y `.tl-open` es lo mismo que el puntero encima. El logo de la marca queda siempre en la esquina superior
+   izquierda. En táctil, en ventana estrecha, con la barra de herramientas abajo o con `#chrome=fixed` las barras siguen fijas. */
+@media (hover: hover) and (pointer: fine) and (min-width: 521px) {
+  .tl-viewer:not([data-chrome="fixed"]):not([data-toolbar="bottom"]) { overflow: hidden; overflow: clip; --tl-edge: 12px; --tl-logo-reserve: 48px; }
+  .tl-viewer:not([data-chrome="fixed"]):not([data-toolbar="bottom"]) .tl-toolbar,
+  .tl-viewer:not([data-chrome="fixed"]):not([data-toolbar="bottom"]) .tl-bottom {
+    position: absolute; left: 0; right: 0; z-index: 30; opacity: 0;
+    background: color-mix(in srgb, var(--tl-bar, var(--panel)) 22%, transparent);
+    -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+    border-color: transparent;
+    transition: transform .22s ease .35s, opacity .22s ease .35s;
+  }
+  .tl-viewer:not([data-chrome="fixed"]):not([data-toolbar="bottom"]) .tl-toolbar { top: 0; transform: translateY(calc(-100% + var(--tl-edge))); padding-left: calc(var(--tl-logo-w, 0px) + 20px); transition: transform .55s ease .35s, opacity .55s ease .35s; }
+  .tl-viewer:not([data-chrome="fixed"]):not([data-toolbar="bottom"]) .tl-bottom { bottom: 0; transform: translateY(50%); opacity: .55; }
+  .tl-viewer:not([data-chrome="fixed"]):not([data-toolbar="bottom"]) .tl-toolbar:hover,
+  .tl-viewer:not([data-chrome="fixed"]):not([data-toolbar="bottom"]) .tl-bottom:hover,
+  .tl-viewer:not([data-chrome="fixed"]):not([data-toolbar="bottom"]) .tl-toolbar.tl-open,
+  .tl-viewer:not([data-chrome="fixed"]):not([data-toolbar="bottom"]) .tl-bottom.tl-open { transform: none; opacity: 1; transition-delay: 0s; }
+  .tl-viewer:not([data-chrome="fixed"]):not([data-toolbar="bottom"]) .tl-toolbar:has(:focus-visible),
+  .tl-viewer:not([data-chrome="fixed"]):not([data-toolbar="bottom"]) .tl-bottom:has(:focus-visible) { transform: none; opacity: 1; transition-delay: 0s; }
+  @supports not selector(:has(*)) {
+    .tl-viewer:not([data-chrome="fixed"]):not([data-toolbar="bottom"]) .tl-toolbar:focus-within,
+    .tl-viewer:not([data-chrome="fixed"]):not([data-toolbar="bottom"]) .tl-bottom:focus-within { transform: none; opacity: 1; transition-delay: 0s; }
+  }
+  /* el libro ocupa toda la ventana; con logo, deja libre la fila de arriba para que no lo tape */
+  .tl-viewer:not([data-chrome="fixed"]):not([data-toolbar="bottom"])[data-logo] .tl-stage,
+  .tl-viewer:not([data-chrome="fixed"]):not([data-toolbar="bottom"])[data-logo] .tl-scroll { top: var(--tl-logo-reserve); }
+  /* y la mitad de la barra de navegación que asoma abajo: el libro no queda debajo (sus esquinas siguen siendo del pase de página) */
+  .tl-viewer:not([data-chrome="fixed"]):not([data-toolbar="bottom"]) .tl-stage,
+  .tl-viewer:not([data-chrome="fixed"]):not([data-toolbar="bottom"]) .tl-scroll { bottom: var(--tl-peek, 0px); }
+  /* logo: el flotante sustituye al de la barra */
+  .tl-viewer:not([data-chrome="fixed"]):not([data-toolbar="bottom"]) .tl-toolbar .tl-brandlogo { display: none; }
+  .tl-viewer:not([data-chrome="fixed"]):not([data-toolbar="bottom"]) .tl-brandlogo-float { display: block; }
+}
+.tl-brandlogo-float { display: none; position: absolute; z-index: 40; top: 6px; left: 10px; margin: 0; pointer-events: none; }
+@media (prefers-reduced-motion: reduce) { .tl-toolbar, .tl-bottom { transition: none !important; } }
+@media (max-width: 520px) {
+  /* en pantalla estrecha la tira ocupa su propia fila sobre los botones: entre ellos solo cabría una miniatura */
+  .tl-bottom { flex-wrap: wrap; justify-content: center; }
+  .tl-film { order: -1; flex: 1 0 100%; }
+  .tl-film-item img { height: 34px; }
+  .tl-brandlogo { max-width: 96px; }
+}
+.tl-pageinput[type="text"] { width: 84px; }
+.tl-pageinput { width: 64px; height: 36px; padding: 0 6px; text-align: center; border: 1px solid var(--line); border-radius: 8px; background: var(--bg); color: var(--fg); font: inherit; }
+.tl-total { color: var(--tl-bar-muted, var(--muted)); white-space: nowrap; min-width: 48px; }
+
+.tl-panel { width: 300px; max-width: 85%; flex: none; display: flex; flex-direction: column; background: var(--panel); border-right: 1px solid var(--line); overflow: auto; z-index: 8; }
+.tl-panel-head { display: flex; align-items: center; justify-content: space-between; padding: 6px 8px 6px 14px; border-bottom: 1px solid var(--line); position: sticky; top: 0; background: var(--panel); z-index: 1; }
+.tl-panel-head h2 { margin: 0; font-size: 15px; }
+.tl-thumbs { list-style: none; margin: 0; padding: 10px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+.tl-thumb { width: 100%; display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 6px; border: 2px solid transparent; border-radius: 8px; background: transparent; color: inherit; cursor: pointer; font: inherit; }
+.tl-thumb:hover { background: var(--btn-hover); }
+.tl-thumb[aria-current="page"] { border-color: var(--accent); }
+.tl-thumb img { width: 100%; height: auto; background: #fff; box-shadow: 0 1px 4px rgba(0,0,0,.3); }
+.tl-toclist { list-style: none; margin: 0; padding: 4px 8px; }
+.tl-toclist .tl-toclist { padding-left: 14px; }
+.tl-tocitem { width: 100%; display: flex; justify-content: space-between; gap: 8px; padding: 8px; border: 0; border-radius: 6px; background: transparent; color: inherit; text-align: left; cursor: pointer; font: inherit; }
+.tl-tocitem:hover { background: var(--btn-hover); }
+.tl-tocpage { color: var(--muted); }
+.tl-empty, .tl-searchstatus { padding: 8px 14px; color: var(--muted); margin: 0; }
+.tl-searchbar { display: flex; gap: 2px; padding: 8px; align-items: center; }
+.tl-searchinput { flex: 1; min-width: 0; height: 40px; padding: 0 10px; border: 1px solid var(--line); border-radius: 8px; background: var(--bg); color: var(--fg); font: inherit; }
+.tl-results { list-style: none; margin: 0; padding: 0 8px 8px; }
+.tl-result { width: 100%; display: flex; flex-direction: column; gap: 2px; padding: 8px; border: 0; border-radius: 6px; background: transparent; color: inherit; text-align: left; cursor: pointer; font: inherit; }
+.tl-result:hover, .tl-result.tl-current { background: var(--btn-hover); }
+.tl-rpage { font-size: 12px; color: var(--muted); }
+.tl-result mark { background: #ffd84d; color: #14171d; border-radius: 2px; }   /* sólido en ambos temas: texto oscuro sobre amarillo ≥ 4.5:1 */
+
+/* Intro / ayuda inicial (F3.3) */
+.tl-intro { position: absolute; inset: 0; z-index: 20; display: flex; align-items: center; justify-content: center; padding: 16px; background: rgba(15, 18, 23, .62); animation: tl-intro-in .2s ease-out; }
+@keyframes tl-intro-in { from { opacity: 0; } }
+.tl-intro-box { width: 100%; max-width: 460px; max-height: 100%; overflow: auto; background: var(--panel); color: var(--fg); border-radius: 14px; box-shadow: 0 12px 48px rgba(0,0,0,.45); text-align: center; }
+.tl-intro-brand { padding: 16px 24px 0; }
+.tl-intro-brand.tl-intro-band { padding: 20px 24px; background: var(--tl-intro-brand, var(--tl-bar, transparent)); }
+.tl-intro-logo { display: block; max-width: 70%; max-height: 72px; margin: 0 auto; object-fit: contain; }
+.tl-intro-content { padding: 20px 24px 24px; }
+.tl-intro-content h2 { margin: 0 0 12px; font-size: 20px; line-height: 1.25; }
+.tl-intro-text { text-align: left; }
+.tl-intro-text p { margin: 0 0 8px; }
+.tl-intro-text ul { margin: 0; padding-left: 20px; }
+.tl-intro-text li { margin: 0 0 8px; }
+.tl-intro-ok { margin-top: 12px; min-height: 44px; padding: 0 28px; border: 0; border-radius: 10px; background: var(--accent); color: var(--accent-fg); font: inherit; font-weight: 600; cursor: pointer; }
+.tl-intro-ok:hover { filter: brightness(1.08); }
+@media print { .tl-intro { display: none !important; } }
+
+.tl-fatal { padding: 2rem; text-align: center; color: #fff; }
+
+@media (max-width: 719px) {
+  .tl-title { display: none; }
+  .tl-grow { flex: 0; }
+  .tl-toolbar { flex-wrap: wrap; }
+  .tl-panel { position: absolute; top: 0; bottom: 0; left: 0; width: 100%; max-width: 100%; }
+  .tl-btn { width: 44px; height: 44px; }
+  .tl-pageinput { width: 56px; }
+  .tl-side { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .tl-viewer *, .tl-viewer *::before, .tl-viewer *::after { animation: none !important; transition: none !important; }
+}
+@media print { .tl-toolbar, .tl-bottom, .tl-panel, .tl-side { display: none !important; } }

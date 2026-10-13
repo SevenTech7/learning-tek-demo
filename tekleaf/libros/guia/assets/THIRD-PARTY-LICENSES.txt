@@ -1,0 +1,5 @@
+TekLeaf — atribución
+====================
+Este paquete fue generado con TekLeaf. Todos los derechos sobre TekLeaf están reservados por sus titulares.
+No incluye bibliotecas de terceros: el viewer y el motor de flip son código propio
+de TekLeaf y la tipografía es la pila de fuentes del sistema. No contiene claves de licencia, activación ni telemetría.

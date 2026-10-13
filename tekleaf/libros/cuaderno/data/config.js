@@ -1,0 +1,39 @@
+window.TEKLEAF_CONFIG = {
+  "formatVersion": "1.8.0",
+  "generator": {
+    "name": "TekLeaf",
+    "version": "1.1.0"
+  },
+  "publication": {
+    "id": "el-ciclo-del-agua-cuaderno-de-trabajo-f316f7e42cbf",
+    "title": "El ciclo del agua — Cuaderno de trabajo",
+    "author": "TekLeaf",
+    "language": "es",
+    "pageCount": 6,
+    "createdAt": "2026-10-12T00:00:00.000Z"
+  },
+  "viewer": {
+    "mode": "page",
+    "doublePage": true,
+    "theme": "auto",
+    "flip": true,
+    "search": true,
+    "selection": false,
+    "thumbnails": true,
+    "download": false,
+    "language": "auto",
+    "intro": {}
+  },
+  "branding": {
+    "logo": "",
+    "colors": {
+      "accent": "#2563eb",
+      "background": "#1f2430"
+    }
+  },
+  "embed": {
+    "allowedOrigins": [
+      "*"
+    ]
+  }
+};

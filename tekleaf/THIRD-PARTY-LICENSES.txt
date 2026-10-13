@@ -1,0 +1,23 @@
+Avisos de terceros — demostración de TekLeaf
+===========================================
+
+TekLeaf (el visor, la página y los libros de ejemplo) es software propietario; ver LICENSE.txt.
+
+pdf.js (carpeta pdfjs/)
+-----------------------
+Versión 6.3.289. Copyright Mozilla Foundation y colaboradores. Licencia Apache 2.0 (pdfjs/LICENSE.txt).
+https://github.com/mozilla/pdf.js
+
+Solo se usa en esta página para convertir, en el navegador de quien la visita, el PDF que esa persona elige.
+Los paquetes que genera TekLeaf no incluyen pdf.js.
+
+Datos que acompañan a pdf.js, con sus propias licencias en cada carpeta:
+  pdfjs/cmaps/            mapas de caracteres de Adobe (LICENSE)
+  pdfjs/standard_fonts/   fuentes estándar: Foxit (LICENSE_FOXIT) y Liberation Sans (LICENSE_LIBERATION, SIL OFL 1.1)
+  pdfjs/wasm/             decodificadores de imagen (OpenJPEG, etc.; sus licencias están en la carpeta)
+  pdfjs/iccs/             perfil de color
+
+Libros de ejemplo (carpeta libros/)
+-----------------------------------
+Contenido original de TekLeaf. Las páginas se compusieron con fuentes del sistema del contenedor de conversión
+(Liberation y DejaVu); el resultado son imágenes, no se redistribuyen los archivos de fuente.

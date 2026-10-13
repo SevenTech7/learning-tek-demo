@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta name="robots" content="noindex, nofollow" />
+    <link rel="icon" type="image/svg+xml" href="../assets/icon.svg" />
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'wasm-unsafe-eval'; style-src 'self'; img-src 'self' blob: data:; font-src 'self' blob: data:; connect-src 'self' blob:; worker-src 'self' blob:; frame-src 'self' blob:; base-uri 'none'; form-action 'none'">
+<title>TekLeaf — Demostración</title>
+<meta name="description" content="Convierte un PDF en un libro con páginas que se pasan, zoom, búsqueda e índice. Demostración de TekLeaf.">
+<meta name="color-scheme" content="light dark">
+<link rel="stylesheet" href="demo.css">
+</head>
+<body>
+<noscript><p class="sin-js">Esta demostración necesita JavaScript.</p></noscript>
+
+<header class="barra">
+  <a class="volver" href="../">← Learning TEK</a>
+  <span class="marca">TekLeaf</span>
+  <span class="chip">Demostración</span>
+</header>
+
+<main id="principal">
+
+  <!-- Inicio: libros de ejemplo y conversión de un PDF propio -->
+  <section id="vista-inicio" class="contenido" aria-labelledby="titulo-inicio">
+    <div class="portada">
+      <h1 id="titulo-inicio">Del PDF a un libro que se hojea</h1>
+      <p class="lead">TekLeaf convierte un PDF en una publicación web con páginas que se pasan, zoom, búsqueda e índice. Abre un libro de ejemplo o prueba con tu propio PDF.</p>
+    </div>
+
+    <div id="bloque-muestras" class="bloque" hidden>
+      <h2>Libros de ejemplo</h2>
+      <ul id="lista-muestras" class="muestras"></ul>
+    </div>
+
+    <div class="bloque">
+      <h2>Convierte tu PDF</h2>
+      <p id="aviso" class="aviso" role="alert" hidden></p>
+      <input id="archivo" class="oculto-visual" type="file" accept="application/pdf,.pdf">
+      <label class="zona" id="zona" for="archivo">
+        <span class="zona-titulo">Arrastra un PDF aquí o elige un archivo</span>
+        <span class="zona-ayuda">Hasta <strong>6 páginas</strong> y <strong>1 MB</strong>.</span>
+        <span class="zona-boton">Elegir un PDF</span>
+      </label>
+      <p class="privacidad">Tu archivo no se sube a ningún servidor: se convierte aquí, en tu navegador, y se descarta al recargar o cerrar la página.</p>
+    </div>
+
+    <div class="bloque nota-demo">
+      <h2>Qué es esta demostración</h2>
+      <p>Es una versión reducida: aquí la conversión la hace tu navegador y por eso hay límites de tamaño. TekLeaf completo convierte en un servidor o contenedor, admite documentos grandes, reconstruye el índice cuando el PDF no lo trae, optimiza las imágenes y aplica la marca de cada organización. El libro que ves es el mismo visor que lleva cada publicación.</p>
+    </div>
+  </section>
+
+  <!-- Convirtiendo -->
+  <section id="vista-progreso" class="contenido centrado" aria-labelledby="titulo-progreso" hidden>
+    <h2 id="titulo-progreso" tabindex="-1">Convirtiendo tu PDF…</h2>
+    <progress id="progreso" max="1" value="0" aria-labelledby="titulo-progreso"></progress>
+    <p id="estado" class="estado" role="status" aria-live="polite"></p>
+    <button id="cancelar" type="button" class="btn btn-sec">Cancelar</button>
+  </section>
+
+  <!-- Libro abierto -->
+  <section id="vista-libro" class="libro" aria-label="Libro" hidden>
+    <div class="libro-barra">
+      <button id="volver-inicio" type="button" class="btn btn-sec">← Volver</button>
+      <div class="libro-info">
+        <h2 id="libro-titulo" class="libro-titulo" tabindex="-1"></h2>
+        <p id="libro-aviso" class="libro-aviso" role="status" hidden></p>
+      </div>
+      <a id="descargar" class="btn btn-sec" href="#" download title="Carpeta con el libro, lista para publicar en cualquier servidor o abrir con doble clic">Descargar<span class="largo"> paquete</span> (.zip)</a>
+    </div>
+    <div id="libro-marco" class="libro-marco"></div>
+  </section>
+
+</main>
+
+<footer class="pie">
+  <p>© TekLeaf. Todos los derechos reservados. <a href="LICENSE.txt">Licencia</a> · <a href="THIRD-PARTY-LICENSES.txt">Avisos de terceros</a></p>
+</footer>
+
+<script type="module" src="demo.js"></script>
+</body>
+</html>
