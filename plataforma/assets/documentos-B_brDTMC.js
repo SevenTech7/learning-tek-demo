@@ -1,0 +1,1 @@
+import{j as t,aK as o}from"./maqueta-BzQuBUtx.js";import"./pdf-lib-Hv_mtLEP.js";function n(){return t.jsx(o,{to:"/"})}function u(r){return t.jsx(o,{to:"/"})}export{u as RutaCategoriaDocumentos,n as RutaMisDocumentos};

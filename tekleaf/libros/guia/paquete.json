@@ -1,0 +1,17 @@
+{
+  "formato": "edu-paquete",
+  "version": 1,
+  "tipo": "flipbook",
+  "titulo": "Guía rápida de TekLeaf",
+  "autor": "TekLeaf",
+  "idioma": "es",
+  "portada": "images/page-001.webp",
+  "entrada": "index.html",
+  "origen": {
+    "generador": "TekLeaf",
+    "version": "1.1.0",
+    "id": "guia-rapida-de-tekleaf-28422b66b91d",
+    "versionContenido": "33a3f70d4f5a"
+  },
+  "audiencia": "todos"
+}

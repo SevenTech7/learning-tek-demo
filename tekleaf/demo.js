@@ -3,13 +3,15 @@
  * Nada se guarda: ni cookies ni datos del visitante. El libro convertido vive en memoria y se descarta al volver o recargar.
  * Lo único que queda en la pestaña es la marca de «ya entró» (sessionStorage), que se borra al cerrarla o al pulsar «Salir».
  *
- * El acceso es una puerta de presentación, no seguridad: la demo no tiene servidor y la credencial es pública (es la misma de las
- * demos de Autoría y Plataforma). El producto real no lleva este acceso.
+ * El acceso es una puerta de presentación, no seguridad: la demo no tiene servidor. La credencial es la misma de las demos de Autoría
+ * y Plataforma y no está en el código: la comprueba `window.AccesoDemo` (acceso.js, en la raíz del sitio de demo) contra un hash.
+ * Sin ese script nadie entra. El producto real no lleva este acceso.
  */
 import { LIMITES, ErrorDemo, convertirPdf, slugify } from './convertir.js';
 import { componerPaquete, crearZip, ARCHIVOS_VISOR } from './paquete.js';
 
-const ACCESO = { usuarios: ['tek', 'tek@tek7.demo'], clave: 'tek7', marca: 'tekleaf-demo:sesion' };
+const ACCESO = { marca: 'tekleaf-demo:sesion' };
+const credencialValida = (usuario, clave) => (window.AccesoDemo ? window.AccesoDemo.verificar(usuario, clave) : Promise.resolve(false));
 
 const $ = (id) => document.getElementById(id);
 const BASE = new URL('./', import.meta.url);
@@ -306,10 +308,9 @@ $('cancelar').addEventListener('click', () => {
   if (abortar) abortar.abort('cancel');
   $('estado').textContent = 'Cancelando…';
 });
-$('form-acceso').addEventListener('submit', (e) => {
+$('form-acceso').addEventListener('submit', async (e) => {
   e.preventDefault();
-  const usuario = $('acceso-usuario').value.trim().toLowerCase();
-  if (ACCESO.usuarios.includes(usuario) && $('acceso-clave').value === ACCESO.clave) {
+  if (await credencialValida($('acceso-usuario').value, $('acceso-clave').value)) {
     marcarEntrada(true);
     $('acceso-usuario').value = '';
     $('acceso-clave').value = '';

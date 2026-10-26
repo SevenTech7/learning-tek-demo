@@ -23,14 +23,7 @@ window.LEARNING_TEK_REGISTRY = {
       "entornos": {
         "demo": {
           "url": "./autoria/",
-          "acceso": [
-            {
-              "rol": "Usuario demo",
-              "usuario": "tek@tek7.demo",
-              "clave": "tek7"
-            }
-          ],
-          "notaPublica": "El editor completo con un proyecto de ejemplo: 21 tipos de componente, plantillas, kits de marca, componentes globales, publicación, vista previa con el player real y descargas. Lo que hagas vive solo en esta pestaña; «Restablecer demo» vuelve al ejemplo."
+          "notaPublica": "Entra con el usuario y la clave que te pasaron (son los mismos en las tres demos). El editor completo con un proyecto de ejemplo: 21 tipos de componente, plantillas, kits de marca, componentes globales, publicación, vista previa con el player real y descargas. Lo que hagas vive solo en esta pestaña; «Restablecer demo» vuelve al ejemplo."
         }
       },
       "codigo": {
@@ -51,14 +44,7 @@ window.LEARNING_TEK_REGISTRY = {
       "entornos": {
         "demo": {
           "url": "./tekleaf/",
-          "acceso": [
-            {
-              "rol": "Usuario demo",
-              "usuario": "tek@tek7.demo",
-              "clave": "tek7"
-            }
-          ],
-          "notaPublica": "Entra con el usuario demo, abre un libro de ejemplo o convierte tu propio PDF (hasta 100 páginas y 5 MB). La conversión ocurre en tu navegador: el archivo no se sube a ningún servidor."
+          "notaPublica": "Entra con el usuario y la clave que te pasaron (son los mismos en las tres demos), abre un libro de ejemplo o convierte tu propio PDF (hasta 100 páginas y 5 MB). La conversión ocurre en tu navegador: el archivo no se sube a ningún servidor."
         }
       },
       "codigo": {
@@ -79,14 +65,7 @@ window.LEARNING_TEK_REGISTRY = {
       "entornos": {
         "demo": {
           "url": "./plataforma/",
-          "acceso": [
-            {
-              "rol": "Usuario demo (entra como admin)",
-              "usuario": "tek@tek7.demo",
-              "clave": "tek7"
-            }
-          ],
-          "notaPublica": "Entra con el usuario demo (también vale «tek»). Queda como admin; con la barra inferior puedes ver la plataforma como alumna, docente, familia, dirección u overlord. Los datos son inventados y no se guardan en ningún servidor: lo que haces solo vive en esta pestaña."
+          "notaPublica": "Entra con el usuario y la clave que te pasaron (son los mismos en las tres demos). Queda como admin; con la barra inferior puedes ver la plataforma como alumna, docente, familia, dirección u overlord. Los datos son inventados y no se guardan en ningún servidor: lo que haces solo vive en esta pestaña."
         }
       }
     }

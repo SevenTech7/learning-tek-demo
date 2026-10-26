@@ -1,0 +1,17 @@
+{
+  "formato": "edu-paquete",
+  "version": 1,
+  "tipo": "flipbook",
+  "titulo": "Cuaderno de repaso: fracciones",
+  "autor": "Colegio Ejemplo",
+  "idioma": "es",
+  "portada": "images/page-001.webp",
+  "entrada": "index.html",
+  "origen": {
+    "generador": "TekLeaf",
+    "version": "1.1.0",
+    "id": "cuaderno-de-repaso-fracciones-5231cfa1e13f",
+    "versionContenido": "52edfa332cfd"
+  },
+  "audiencia": "todos"
+}

@@ -1,5 +1,5 @@
 window.TEKLEAF_CONFIG = {
-  "formatVersion": "1.8.0",
+  "formatVersion": "1.9.0",
   "generator": {
     "name": "TekLeaf",
     "version": "1.1.0"

@@ -1,0 +1,17 @@
+{
+  "formato": "edu-paquete",
+  "version": 1,
+  "tipo": "flipbook",
+  "titulo": "El ciclo del agua — Cuaderno de trabajo",
+  "autor": "TekLeaf",
+  "idioma": "es",
+  "portada": "images/page-001.webp",
+  "entrada": "index.html",
+  "origen": {
+    "generador": "TekLeaf",
+    "version": "1.1.0",
+    "id": "el-ciclo-del-agua-cuaderno-de-trabajo-f316f7e42cbf",
+    "versionContenido": "debcd8631c82"
+  },
+  "audiencia": "todos"
+}

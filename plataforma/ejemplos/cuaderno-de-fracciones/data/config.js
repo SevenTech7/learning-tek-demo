@@ -1,0 +1,39 @@
+window.TEKLEAF_CONFIG = {
+  "formatVersion": "1.9.0",
+  "generator": {
+    "name": "TekLeaf",
+    "version": "1.1.0"
+  },
+  "publication": {
+    "id": "cuaderno-de-repaso-fracciones-5231cfa1e13f",
+    "title": "Cuaderno de repaso: fracciones",
+    "author": "Colegio Ejemplo",
+    "language": "es",
+    "pageCount": 5,
+    "createdAt": "2026-10-12T00:00:00.000Z"
+  },
+  "viewer": {
+    "mode": "page",
+    "doublePage": true,
+    "theme": "auto",
+    "flip": true,
+    "search": true,
+    "selection": false,
+    "thumbnails": true,
+    "download": false,
+    "language": "auto",
+    "intro": {}
+  },
+  "branding": {
+    "logo": "",
+    "colors": {
+      "accent": "#2563eb",
+      "background": "#1f2430"
+    }
+  },
+  "embed": {
+    "allowedOrigins": [
+      "*"
+    ]
+  }
+};

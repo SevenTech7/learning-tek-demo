@@ -70,7 +70,6 @@ h2 { font-size: 1.15rem; }
 .acceso input { font: inherit; padding: 9px 10px; border: 1px solid var(--borde); border-radius: 8px; background: var(--superficie-2); color: var(--texto); }
 .acceso input:focus-visible { outline: 3px solid var(--acento); outline-offset: 1px; }
 .acceso .btn { margin-top: 10px; }
-.acceso-ayuda { margin: 6px 0 0; font-size: 0.85rem; color: var(--texto-2); }
 
 /* Contenido */
 main { flex: 1; display: flex; flex-direction: column; min-height: 0; }

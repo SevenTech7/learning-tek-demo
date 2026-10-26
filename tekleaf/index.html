@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="es">
 <head>
+    <script src="../acceso.js"></script>
     <meta name="robots" content="noindex, nofollow" />
     <link rel="icon" type="image/svg+xml" href="../assets/icon.svg" />
 <meta charset="utf-8">
@@ -27,14 +28,13 @@
   <section id="vista-acceso" class="contenido centrado" aria-labelledby="titulo-acceso" hidden>
     <form id="form-acceso" class="acceso" novalidate>
       <h1 id="titulo-acceso">Entra a la demostración</h1>
-      <p class="lead">El mismo usuario demo sirve en Autoría, TekLeaf y Plataforma Educativa.</p>
+      <p class="lead">El mismo usuario sirve en Autoría, TekLeaf y Plataforma Educativa.</p>
       <label for="acceso-usuario">Usuario o correo</label>
       <input id="acceso-usuario" name="usuario" type="text" autocomplete="username" autocapitalize="none" spellcheck="false" required>
       <label for="acceso-clave">Contraseña</label>
       <input id="acceso-clave" name="clave" type="password" autocomplete="current-password" required>
       <p id="acceso-error" class="aviso" role="alert" hidden></p>
       <button type="submit" class="btn">Entrar</button>
-      <p class="acceso-ayuda">Usuario demo: <strong>tek@tek7.demo</strong> · clave: <strong>tek7</strong></p>
     </form>
   </section>
 
