@@ -498,6 +498,61 @@ main:focus {
   cursor: not-allowed;
 }
 
+/*
+ * Alineación entre tarjetas: cada tarjeta ocupa las mismas 7 filas de la rejilla (subgrid), así que la
+ * descripción, las tecnologías, la línea de estado y los botones quedan a la misma altura aunque un texto
+ * ocupe más líneas. Una fila vacía (por ejemplo, sin nota MVP) mide 0 en todas. Sin subgrid se queda el
+ * apilado de arriba, con los botones al fondo.
+ */
+@supports (grid-template-rows: subgrid) {
+  .rejilla {
+    row-gap: 0;
+  }
+
+  .app {
+    display: grid;
+    grid-template-rows: subgrid;
+    grid-row: span 7;
+    row-gap: 0;
+    margin-bottom: 20px;
+    align-content: start;
+  }
+
+  .app > * {
+    margin: 14px 0 0;
+  }
+  .app > :first-child {
+    margin-top: 0;
+  }
+  .app > h2 {
+    margin-top: 8px;
+  }
+
+  .app__cabeza {
+    grid-row: 1;
+  }
+  .app > h2 {
+    grid-row: 2;
+  }
+  .app__desc {
+    grid-row: 3;
+  }
+  .stack {
+    grid-row: 4;
+    align-content: flex-start;
+  }
+  .app__mvp {
+    grid-row: 5;
+  }
+  .app__entorno {
+    grid-row: 6;
+  }
+  .app__acciones {
+    grid-row: 7;
+    align-self: end;
+  }
+}
+
 /* ── Pie ──────────────────────────────────────────────────────────────── */
 
 .pie {

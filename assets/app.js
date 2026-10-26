@@ -10,7 +10,7 @@
 
   var ETIQUETA_SALUD = {
     comprobando: "Comprobando…",
-    ok: "Responde",
+    ok: "En línea",
     ko: "Sin respuesta",
     "sin-url": "Sin desplegar",
   };
@@ -147,6 +147,8 @@
       if (codigo) {
         acciones.appendChild(el("a", { className: "boton boton--secundario", href: codigo, target: "_blank", rel: "noopener noreferrer" }, "Código"));
       }
+    } else if (app.insignia) {
+      acciones.appendChild(el("span", { className: "boton boton--inactivo", title: "Demostración con datos de ejemplo; no es el producto" }, app.insignia));
     }
     nodo.appendChild(acciones);
 

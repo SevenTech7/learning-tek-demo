@@ -22,8 +22,7 @@ window.LEARNING_TEK_REGISTRY = {
       ],
       "entornos": {
         "demo": {
-          "url": "./autoria/",
-          "notaPublica": "Entra con el usuario y la clave que te pasaron (son los mismos en las tres demos). El editor completo con un proyecto de ejemplo: 21 tipos de componente, plantillas, kits de marca, componentes globales, publicación, vista previa con el player real y descargas. Lo que hagas vive solo en esta pestaña; «Restablecer demo» vuelve al ejemplo."
+          "url": "./autoria/"
         }
       },
       "codigo": {
@@ -43,8 +42,7 @@ window.LEARNING_TEK_REGISTRY = {
       ],
       "entornos": {
         "demo": {
-          "url": "./tekleaf/",
-          "notaPublica": "Entra con el usuario y la clave que te pasaron (son los mismos en las tres demos), abre un libro de ejemplo o convierte tu propio PDF (hasta 100 páginas y 5 MB). La conversión ocurre en tu navegador: el archivo no se sube a ningún servidor."
+          "url": "./tekleaf/"
         }
       },
       "codigo": {
@@ -62,10 +60,10 @@ window.LEARNING_TEK_REGISTRY = {
         "PostgreSQL + RLS",
         "Azure"
       ],
+      "insignia": "Versión mockup",
       "entornos": {
         "demo": {
-          "url": "./plataforma/",
-          "notaPublica": "Entra con el usuario y la clave que te pasaron (son los mismos en las tres demos). Queda como admin; con la barra inferior puedes ver la plataforma como alumna, docente, familia, dirección u overlord. Los datos son inventados y no se guardan en ningún servidor: lo que haces solo vive en esta pestaña."
+          "url": "./plataforma/"
         }
       }
     }
