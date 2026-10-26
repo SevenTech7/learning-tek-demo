@@ -308,9 +308,18 @@ $('cancelar').addEventListener('click', () => {
   if (abortar) abortar.abort('cancel');
   $('estado').textContent = 'Cancelando…';
 });
+let verificando = false;
 $('form-acceso').addEventListener('submit', async (e) => {
   e.preventDefault();
-  if (await credencialValida($('acceso-usuario').value, $('acceso-clave').value)) {
+  // Comprobar el hash tarda unas décimas de segundo: un solo intento a la vez, para que uno fallido no borre la clave del siguiente.
+  if (verificando) return;
+  verificando = true;
+  const boton = $('form-acceso').querySelector('button[type=submit]');
+  boton.disabled = true;
+  $('acceso-error').hidden = true;
+  let valida = false;
+  try { valida = await credencialValida($('acceso-usuario').value, $('acceso-clave').value); } finally { verificando = false; boton.disabled = false; }
+  if (valida) {
     marcarEntrada(true);
     $('acceso-usuario').value = '';
     $('acceso-clave').value = '';
