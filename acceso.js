@@ -19,8 +19,8 @@
 (function () {
   "use strict";
 
-  var SAL = "Oj9hIJo0hxWij4uir/ZDAA==";
-  var HASH = "I4dwicPjFRkjmU5obr6dbzev5xaXeVP5YWulDN3OarM=";
+  var SAL = "Nb/npkv50aQ+tvDl6YUczg==";
+  var HASH = "PSPz2jI06shzBBWbgKy1DR5jTXwITD/XB16gaWJ1lRU=";
   var VUELTAS = 310000;
 
   var MARCA = "tek7-demo:acceso";
