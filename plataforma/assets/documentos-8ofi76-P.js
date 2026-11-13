@@ -1,0 +1,1 @@
+import{j as t,aU as o}from"./maqueta-DnXMqaLl.js";import"./pdf-lib-CLrTP9iB.js";function n(){return t.jsx(o,{to:"/"})}function u(r){return t.jsx(o,{to:"/"})}export{u as RutaCategoriaDocumentos,n as RutaMisDocumentos};

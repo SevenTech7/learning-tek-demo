@@ -1,0 +1,1 @@
+import{j as r}from"./maqueta-DnXMqaLl.js";import{R as t}from"./RecursosDocente-CEaqppfW.js";import"./pdf-lib-CLrTP9iB.js";import"./use-documentos-docente-tvtOBlFc.js";function n({productoId:o}){return r.jsx(t,{productoId:o})}export{n as RutaRecursosDocente};

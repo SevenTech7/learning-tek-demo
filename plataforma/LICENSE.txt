@@ -1,4 +1,4 @@
-Copyright (c) 2026 Portal Educativo Interactivo. Todos los derechos reservados.
+Copyright (c) 2026 TEK7. Todos los derechos reservados.
 
 Este software, su documentación y sus recursos (en conjunto, el «Software») son propiedad de sus titulares y
 están protegidos por las leyes de derechos de autor.
@@ -17,7 +17,7 @@ TITULARES SERÁN RESPONSABLES DE RECLAMACIONES, DAÑOS U OTRAS RESPONSABILIDADES
 
 ---
 
-Copyright (c) 2026 Portal Educativo Interactivo. All rights reserved.
+Copyright (c) 2026 TEK7. All rights reserved.
 
 No license is granted to use, copy, modify, merge, publish, distribute, sublicense, sell or create derivative
 works of this software, in whole or in part, without the prior written permission of the copyright holders.
